@@ -1,3 +1,18 @@
 spring:
   application:
     name: beat-sanctum
+  datasource:
+    url: jdbc:postgresql://localhost:5432/beatsanctum
+    username: devUser
+    password: devPassword
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+aws:
+  s3:
+    endpoint: http://localhost:4566
+    bucket: beatsanctum-tracks
+    region: eu-west-2
