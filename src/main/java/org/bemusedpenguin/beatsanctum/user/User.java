@@ -18,7 +18,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(name = "is_admin", nullable = false)
     private boolean admin;
 
     @Column(nullable = false, updatable = false)
