@@ -16,3 +16,6 @@ aws:
     endpoint: http://localhost:4566
     bucket: beatsanctum-tracks
     region: eu-west-2
+
+app:
+  jwt-secret: ${JWT_SECRET}
