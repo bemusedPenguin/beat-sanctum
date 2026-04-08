@@ -1,0 +1,5 @@
+CREATE TABLE invite_token (
+    id          BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    token       VARCHAR(255) NOT NULL UNIQUE,
+    created_at  TIMESTAMP NOT NULL DEFAULT NOW()
+);
