@@ -5,6 +5,9 @@ spring:
     url: jdbc:postgresql://localhost:5432/beatsanctum
     username: devUser
     password: devPassword
+    hikari:
+      connection-timeout: 30000
+      initialization-fail-timeout: 60000
   jpa:
     hibernate:
       ddl-auto: validate
