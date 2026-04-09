@@ -1,5 +1,6 @@
 package org.bemusedpenguin.beatsanctum.event;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -29,7 +30,7 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<EventResponse> createEvent(@RequestBody CreateEventRequest request,
+    public ResponseEntity<EventResponse> createEvent(@Valid @RequestBody CreateEventRequest request,
                                                      Authentication authentication) {
         System.out.println("Authenticated user: " + authentication.getName());
 
