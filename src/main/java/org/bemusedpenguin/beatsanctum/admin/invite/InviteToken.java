@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "invite_tokens")
+@Table(name = "invite_token")
 public class InviteToken {
 
     @Id
