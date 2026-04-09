@@ -2,6 +2,7 @@ package org.bemusedpenguin.beatsanctum.admin.invite;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.UUID;
@@ -15,6 +16,7 @@ public class InviteTokenService {
         this.inviteTokenRepository = inviteTokenRepository;
     }
 
+    @Transactional
     public InviteToken regenerateToken() {
         inviteTokenRepository.deleteAll();
         return inviteTokenRepository.save(new InviteToken(UUID.randomUUID().toString()));

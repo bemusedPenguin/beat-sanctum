@@ -8,6 +8,7 @@ import org.bemusedpenguin.beatsanctum.user.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.unit.DataSize;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -47,6 +48,7 @@ public class TrackService {
         this.s3Properties = s3Properties;
     }
 
+    @Transactional
     public Track uploadTrack(Long eventId, String title, MultipartFile file, String username) throws IOException {
         if (file.getSize() > maxFileSize.toBytes()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "File exceeds 100MB limit");
@@ -102,6 +104,7 @@ public class TrackService {
         return response.asInputStream();
     }
 
+    @Transactional
     public void deleteTrack(Long eventId, Long trackId, String username) {
         Track track = getTrack(eventId, trackId);
         User user = userService.findByUsername(username);

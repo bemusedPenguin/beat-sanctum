@@ -4,6 +4,7 @@ import org.bemusedpenguin.beatsanctum.user.User;
 import org.bemusedpenguin.beatsanctum.user.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
@@ -20,6 +21,7 @@ public class EventService {
         this.userService = userService;
     }
 
+    @Transactional
     public Event createEvent(String name, String description, LocalDate eventDate, String username) {
         User user = userService.findByUsername(username);
         Event event = new Event(name, description, user, eventDate);
@@ -35,6 +37,7 @@ public class EventService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found"));
     }
 
+    @Transactional
     public void deleteEvent(Long id) {
         eventRepository.deleteById(id);
     }

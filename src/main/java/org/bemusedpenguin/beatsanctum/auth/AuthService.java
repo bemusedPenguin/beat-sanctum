@@ -4,6 +4,7 @@ import org.bemusedpenguin.beatsanctum.user.User;
 import org.bemusedpenguin.beatsanctum.user.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
@@ -17,6 +18,7 @@ public class AuthService {
         this.jwtService = jwtService;
     }
 
+    @Transactional
     public AuthResponse signup(SignupRequest request) {
         User user = userService.register(request.username(), request.password(), request.inviteToken());
         return new AuthResponse(jwtService.generateToken(user));
