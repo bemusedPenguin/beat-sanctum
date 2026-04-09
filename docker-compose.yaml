@@ -1,5 +1,6 @@
 services:
   app:
+    container_name: beat-sanctum
     build: .
     ports:
       - "8080:8080"
