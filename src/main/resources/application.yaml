@@ -3,8 +3,8 @@ spring:
     name: beat-sanctum
   datasource:
     url: jdbc:postgresql://localhost:5432/beatsanctum
-    username: devUser
-    password: devPassword
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
     hikari:
       connection-timeout: 30000
       initialization-fail-timeout: 60000
