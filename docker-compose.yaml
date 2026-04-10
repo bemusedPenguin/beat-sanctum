@@ -10,7 +10,7 @@ services:
     restart: unless-stopped
 
   app:
-    container_name: beat-sanctum
+    container_name: beat-sanctum-app
     build: .
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/beatsanctum
