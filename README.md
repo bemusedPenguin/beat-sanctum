@@ -11,7 +11,7 @@ graph TD
     UI["beat-sanctum-ui\nReact SPA"]
     API["beat-sanctum\nSpring Boot API\n(port 8080)"]
     PG["PostgreSQL 16"]
-    S3["LocalStack S3\n(beatsanctum-tracks)"]
+    S3["MinIO\n(beatsanctum-tracks)"]
 
     Browser --> Nginx
     Nginx -->|"Static assets"| UI
@@ -27,7 +27,7 @@ graph TD
 | `beat-sanctum-ui` | Built from `../beat-sanctum-ui` | Nginx serving the React SPA + API reverse proxy |
 | `beat-sanctum-app` | Built from `.` | Spring Boot REST API |
 | `postgres` | `postgres:16` | Persistent relational data |
-| `localstack` | `localstack/localstack:3` | S3-compatible audio file storage |
+| `beat-sanctum-minio` | `minio/minio:latest` | S3-compatible audio file storage (data persisted to `./minio-data`) |
 
 ## Data Model
 
@@ -152,7 +152,7 @@ Interactive API docs are available at `http://localhost:8080/swagger-ui.html` wh
 - **Spring Security** with JWT (JJWT 0.12.6)
 - **Spring Data JPA** + **Flyway** migrations
 - **PostgreSQL 16**
-- **AWS S3 SDK v2** (LocalStack for local dev)
+- **AWS S3 SDK v2** (MinIO for self-hosted S3-compatible storage)
 - **SpringDoc OpenAPI** (Swagger UI)
 - **Docker** + **Docker Compose**
 
@@ -211,7 +211,7 @@ cd ../beat-sanctum && docker compose up --build -d
 | `80` | Nginx (UI + API proxy) — primary entry point |
 | `8080` | Spring Boot API (internal only) |
 | `5432` | PostgreSQL (internal only) |
-| `4566` | LocalStack S3 (internal only) |
+| `9000` | MinIO S3 (internal only) |
 
 ### First-run notes
 
@@ -233,7 +233,7 @@ Run the backend standalone (without Docker):
 
 ```bash
 # Start dependencies only
-docker compose up postgres localstack -d
+docker compose up postgres minio -d
 
 # Run the app
 ./gradlew bootRun
