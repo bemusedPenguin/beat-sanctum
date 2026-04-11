@@ -51,7 +51,7 @@ public class TrackService {
     @Transactional
     public Track uploadTrack(Long eventId, String title, MultipartFile file, String username) throws IOException {
         if (file.getSize() > maxFileSize.toBytes()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "File exceeds 100MB limit");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "File exceeds 50MB limit");
         }
 
         String mimeType = detectMimeType(file);
