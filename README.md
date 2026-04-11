@@ -185,9 +185,15 @@ Edit `.env`:
 ```env
 POSTGRES_USER=beatsanctum
 POSTGRES_PASSWORD=changeme
-JWT_SECRET=your-secret-key-at-least-32-chars
+APP_JWT_SECRET=<base64-encoded-secret-at-least-32-bytes>
 MINIO_ROOT_USER=minioadmin
 MINIO_ROOT_PASSWORD=changeme-min-8-chars
+```
+
+To generate a secure `APP_JWT_SECRET`:
+
+```bash
+openssl rand -base64 32
 ```
 
 ### 3. Start the stack
@@ -237,7 +243,8 @@ Run the backend standalone (without Docker):
 # Start dependencies only
 docker compose up postgres minio -d
 
-# Run the app
+# Export env vars, then run the app
+export $(cat .env | xargs)
 ./gradlew bootRun
 ```
 
