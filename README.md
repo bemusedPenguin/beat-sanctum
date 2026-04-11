@@ -213,6 +213,20 @@ cd ../beat-sanctum && docker compose up --build -d
 | `5432` | PostgreSQL (internal only) |
 | `4566` | LocalStack S3 (internal only) |
 
+### First-run notes
+
+On first startup, a single invite token is automatically seeded into the database so you can register the first user. Retrieve it by querying the `invite_token` table:
+
+```sql
+SELECT token FROM invite_token WHERE used = false;
+```
+
+Admin privileges are **not** granted through registration. To make a user an admin, manually flip the `admin` column in the `users` table after they have registered:
+
+```sql
+UPDATE users SET admin = true WHERE username = 'your-username';
+```
+
 ## Local Development
 
 Run the backend standalone (without Docker):
