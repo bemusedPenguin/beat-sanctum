@@ -188,6 +188,7 @@ POSTGRES_PASSWORD=changeme
 APP_JWT_SECRET=<base64-encoded-secret-at-least-32-bytes>
 MINIO_ROOT_USER=minioadmin
 MINIO_ROOT_PASSWORD=changeme-min-8-chars
+CORS_ALLOWED_ORIGINS=localhost for dev, domain for prod
 ```
 
 To generate a secure `APP_JWT_SECRET`:
