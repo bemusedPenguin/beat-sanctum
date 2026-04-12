@@ -39,16 +39,20 @@ public class Track {
 
     private Integer durationSeconds;
 
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
     @Column(nullable = false, updatable = false)
     private LocalDateTime uploadedAt;
 
     protected Track() {}
 
-    public Track(Event event, User uploadedBy, String title, String originalFilename,
+    public Track(Event event, User uploadedBy, String title, String description, String originalFilename,
                  String fileKey, String mimeType, Long fileSize) {
         this.event = event;
         this.uploadedBy = uploadedBy;
         this.title = title;
+        this.description = description;
         this.originalFilename = originalFilename;
         this.fileKey = fileKey;
         this.mimeType = mimeType;
@@ -90,6 +94,10 @@ public class Track {
 
     public Integer getDurationSeconds() {
         return durationSeconds;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public LocalDateTime getUploadedAt() {

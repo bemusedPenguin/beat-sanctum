@@ -25,9 +25,10 @@ public class TrackController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<TrackResponse> uploadTrack(@PathVariable Long eventId,
                                                      @RequestParam String title,
+                                                     @RequestParam(required = false) String description,
                                                      @RequestParam MultipartFile file,
                                                      Authentication authentication) throws IOException {
-        Track track = trackService.uploadTrack(eventId, title, file, authentication.getName());
+        Track track = trackService.uploadTrack(eventId, title, description, file, authentication.getName());
         return ResponseEntity.status(HttpStatus.CREATED).body(TrackResponse.from(track));
     }
 

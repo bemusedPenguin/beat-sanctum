@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public record TrackResponse(Long id, Long eventId, String uploadedBy, String title,
                             String originalFilename, String mimeType, Long fileSize,
-                            Integer durationSeconds, LocalDateTime uploadedAt) {
+                            Integer durationSeconds, String description, LocalDateTime uploadedAt) {
 
     public static TrackResponse from(Track track) {
         return new TrackResponse(
@@ -16,6 +16,7 @@ public record TrackResponse(Long id, Long eventId, String uploadedBy, String tit
                 track.getMimeType(),
                 track.getFileSize(),
                 track.getDurationSeconds(),
+                track.getDescription(),
                 track.getUploadedAt()
         );
     }

@@ -49,7 +49,7 @@ public class TrackService {
     }
 
     @Transactional
-    public Track uploadTrack(Long eventId, String title, MultipartFile file, String username) throws IOException {
+    public Track uploadTrack(Long eventId, String title, String description, MultipartFile file, String username) throws IOException {
         if (file.getSize() > maxFileSize.toBytes()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "File exceeds 50MB limit");
         }
@@ -72,7 +72,7 @@ public class TrackService {
                         .build(),
                         RequestBody.fromBytes(file.getBytes()));
 
-        Track track = new Track(event, user, title, file.getOriginalFilename(),
+        Track track = new Track(event, user, title, description, file.getOriginalFilename(),
                 fileKey, mimeType, file.getSize());
 
         return trackRepository.save(track);
