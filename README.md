@@ -53,6 +53,7 @@ erDiagram
         uuid event_id FK
         uuid uploaded_by FK
         string title
+        text description
         string original_filename
         string file_key
         string mime_type
@@ -138,7 +139,23 @@ sequenceDiagram
 | `POST` | `/events/{eventId}/tracks` | Required | Upload a track (multipart, max 50 MB) |
 | `DELETE` | `/events/{eventId}/tracks/{trackId}` | Required | Delete a track |
 
-**Upload form fields:** `title` (string), `file` (audio/mpeg or audio/wav, max 50 MB)
+**Upload form fields:** `title` (string), `description` (string, optional), `file` (audio/mpeg or audio/wav, max 50 MB)
+
+**Track response:**
+```json
+{
+  "id": 1,
+  "eventId": 1,
+  "uploadedBy": "username",
+  "title": "My Track",
+  "description": "Some notes about this track...",
+  "originalFilename": "track.mp3",
+  "mimeType": "audio/mpeg",
+  "fileSize": 4194304,
+  "durationSeconds": null,
+  "uploadedAt": "2025-06-01T20:00:00"
+}
+```
 
 ### Admin
 
